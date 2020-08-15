@@ -15,9 +15,7 @@ and then the command:
 from this directory. This should allow use of the script from anywhere within the OS. 
 
 ## Example Output
-Below is an example output. 
+Below is an example output. The script will display how many spots are available for each of the times.
 
 !(Example Output)[example.png]
-
-
 
