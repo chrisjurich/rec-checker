@@ -17,5 +17,5 @@ from this directory. This should allow use of the script from anywhere within th
 ## Example Output
 Below is an example output. The script will display how many spots are available for each of the times.
 
-!(Example Output)[example.png]
+![Example Output](example.png)
 
