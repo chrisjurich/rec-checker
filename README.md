@@ -17,7 +17,7 @@ from this directory. This should allow use of the script from anywhere within th
 ## Example Output
 Below is an example output. 
 
-!(Example Output)[example.png]
+![Example Output](example.png)
 
 
 
