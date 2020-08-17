@@ -3,8 +3,8 @@ For fall of 2020, the UNL rec centers are operating on a reservation system wher
 ## Dependencies and Install
 Rec Checker has only been tested on python3. It depends on the following external modules:
     
-    + `urllib.request`
-    + `BeautifulSoup`
+   + `urllib.request`
+   + `BeautifulSoup`
     
 Beyond that, it is recommened to make the script excecutable and callable from the commandline by adding the following line to the top of the script:
 
