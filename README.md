@@ -14,7 +14,10 @@ and then the command:
 
 `chmod +x rec_checker.py && export PATH=$(pwd):$PATH`
 
-from this directory. This should allow use of the script from anywhere within the OS. 
+from this directory. This should allow use of the script from anywhere within the OS. If it does not, you may consider adding the following to your `.bash_profile` or similar config file:
+`export PATH = "/path/to/re_checker/:$PATH"`
+
+and then source the config file.
 
 ## Example Output
 Below is an example output. The script will display how many spots are available for each of the times.
