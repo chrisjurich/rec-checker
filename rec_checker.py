@@ -1,3 +1,4 @@
+#!/Users/cjurich/opt/miniconda3/bin/python3
 import urllib.request
 from bs4 import BeautifulSoup
 import re
@@ -69,7 +70,7 @@ class LiftTime:
         elif self.fill_level == "high":
             color = TermColor.red
         return "{COLOR_START}{CURR} spots{RESET}".format(
-                COLOR_START=color,CURR=self.spots_remaining,RESET=TermColor.reset
+                COLOR_START=color,CURR=(" " if self.spots_remaining < 10 else "" )+ str(self.spots_remaining),RESET=TermColor.reset
                 )
 
 class LiftCalendar:
@@ -149,7 +150,7 @@ def build_lift_times():
                     "end_time" : end,
                     "spots_remaining" : available,
                     "date" : date,
-                    "fill_level" : ["high","medium","low"][int(available/total) + 1]
+                    "fill_level" : "low" if available > 30 else ("medium" if available > 15 else "high")
 
                     }
                     ))
