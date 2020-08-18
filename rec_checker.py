@@ -100,8 +100,11 @@ class LiftCalendar:
             for day in self.days:
                 if (day,time) not in self.lift_holder:
 
-                    if day == self.days[0]: # and time <= datetime.datetime.now().hour:
-                        line += "|" + "   passed   "
+                    if day == self.days[0]:
+                        if time > datetime.datetime.now().hour:
+                            line += f"|{TermColor.red}  no spots  {TermColor.reset}"
+                        else:
+                            line += "|" + "   passed   "
                     else:
                         line += "|" + " not opened "
                 else:
