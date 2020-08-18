@@ -77,7 +77,7 @@ class LiftCalendar:
     """Class that holds the lift times and delays them"""
     def __init__(self,**kwargs):
         self.days = list()
-        self.times = tuple((9,10,11,12,13,14,15,16,17,18,19,20,21))
+        self.times = tuple((6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23))
         self.lift_holder = dict()
 
         for variable, value in kwargs.items():
