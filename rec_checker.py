@@ -69,8 +69,8 @@ class LiftTime:
             color = TermColor.yellow
         elif self.fill_level == "high":
             color = TermColor.red
-        return "{COLOR_START}{CURR} spots{RESET}".format(
-                COLOR_START=color,CURR=(" " if self.spots_remaining < 10 else "" )+ str(self.spots_remaining),RESET=TermColor.reset
+        return "{COLOR_START}{CURR} spot{PLUR}{RESET}".format(
+                COLOR_START=color,CURR=(" " if self.spots_remaining < 10 else "" )+ str(self.spots_remaining),RESET=TermColor.reset,PLUR="s" if self.spots_remaining > 1 else " "
                 )
 
 class LiftCalendar:
