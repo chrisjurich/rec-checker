@@ -1,8 +1,9 @@
-#!/Users/cjurich/opt/miniconda3/bin/python3
+#!/home/cjurich/anaconda3/bin/python
 import urllib.request
 from bs4 import BeautifulSoup
 import re
 import datetime
+import webbrowser
 
 ###################################################################################
 ############################## CONSTANTS ##########################################
@@ -75,13 +76,18 @@ class LiftTime:
 
 class LiftCalendar:
     """Class that holds the lift times and delays them"""
-    def __init__(self,**kwargs):
+    def __init__(self, **kwargs):
         self.days = list()
-        self.times = tuple((6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23))
         self.lift_holder = dict()
+        self.is_break = False
 
         for variable, value in kwargs.items():
             setattr(self,variable,value)
+        
+        if not self.is_break:
+            self.times = tuple((6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23))
+        else: 
+            self.times = tuple((11, 12.3, 14, 15.3, 17, 18.3, 20))
 
     def display(self):
         """Driver method that displays lift availablity information"""
@@ -92,9 +98,14 @@ class LiftCalendar:
         body = []
 
         for time in self.times:
-            line = " {TIME}:00 {MER}m".format(
-                    TIME=str(time if time <= 12 else time -12),
-                    MER='a' if time < 12 else 'p'
+            rem = str(int((time-int(time))*100))
+            while len(rem) < 2: 
+                rem = '0' + rem
+ 
+            line = " {TIME}:{REM} {MER}m".format(
+                    TIME=str(int(time) if time <= 12 else int(time) - 12),
+                    MER='a' if time < 12 else 'p',
+                    REM=rem
                     )
             line += " "*(10-len(line))
             for day in self.days:
@@ -160,7 +171,7 @@ def build_lift_times():
 
     return lift_times
 
-def build_lift_calendar(lift_times):
+def build_lift_calendar(lift_times, is_break=False):
     """Method that takes a list of lif times and turns them into a LiftCalendar object"""
     days = set()
     lift_dict = dict()
@@ -169,16 +180,24 @@ def build_lift_calendar(lift_times):
 
         days.add(lift.date)
         lift_dict[(lift.date,lift.start_time)] = lift
+    return LiftCalendar(days=sorted(list(days)), lift_holder=lift_dict, is_break=is_break)
+#            **{
+#            "days" : sorted(list(days)),
+#            "lift_holder" : lift_dict
+#        })
 
-    return LiftCalendar(**{
-            "days" : sorted(list(days)),
-            "lift_holder" : lift_dict
-        })
+def launch_webpage_option():
+    """Method that allows"""
+    result = input("To launch the sign up page, enter \"y\".\nPress any other key to quit: ")
+    if result == 'Y' or result == 'y':
+        webbrowser.open('https://crec.unl.edu')
+
 
 def main():
     lift_times = build_lift_times()
-    lift_calendar = build_lift_calendar(lift_times)
+    lift_calendar = build_lift_calendar(lift_times, True)
     lift_calendar.display()
+    launch_webpage_option()
 
 ###################################################################################
 
